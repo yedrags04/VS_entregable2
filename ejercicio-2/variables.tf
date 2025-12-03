@@ -19,3 +19,13 @@ variable "db_root_password" {
   type        = string
   sensitive   = true
 }
+
+variable "docker_image" {
+  description = "Imagen de Docker a desplegar"
+  type        = string
+  # OPCIÓN A: Si aún no tienes tu GitHub Action funcionando, usa la oficial para probar ya:
+  # default     = "matomo:apache" 
+  
+  # OPCIÓN B: Si ya configuraste GitHub Actions, pon tu usuario real:
+  default   = "yedrags04/matomo-custom:latest"
+}

@@ -2,7 +2,7 @@ name: Build and Push Matomo Image
 
 on:
   push:
-    [cite_start]branches: [ "master" ] # Se ejecuta al hacer push en master 
+    [cite_start]branches: [ "main" ] # Se ejecuta al hacer push en master 
 
 jobs:
   build:

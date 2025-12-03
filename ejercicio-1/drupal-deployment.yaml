@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: drupal
+spec:
+  selector:
+    matchLabels:
+      app: drupal
+  template:
+    metadata:
+      labels:
+        app: drupal
+    spec:
+      initContainers:
+      - name: init-sites-volume
+        image: drupal:latest
+        command: ['sh', '-c', 'cp -r /var/www/html/sites/* /data/']
+        volumeMounts:
+        - name: drupal-site-storage
+          mountPath: /data
+      containers:
+      - name: drupal
+        image: drupal:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: DRUPAL_DB_HOST
+          value: "mysql"
+        - name: DRUPAL_DB_USER
+          value: "drupal_user"
+        - name: DRUPAL_DB_PASSWORD
+          value: "drupal_pass"
+        - name: DRUPAL_DB_NAME
+          value: "drupal"
+        volumeMounts:
+        - name: drupal-site-storage
+          mountPath: /var/www/html/sites
+      volumes:
+      - name: drupal-site-storage
+        persistentVolumeClaim:
+          claimName: drupal-site-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: drupal-service
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30085 # Mapeo al host (usando port forwarding o minikube ip)
+  selector:
+    app: drupal

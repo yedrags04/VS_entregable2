@@ -27,5 +27,5 @@ variable "docker_image" {
   # default     = "matomo:apache" 
   
   # OPCIÓN B: Si ya configuraste GitHub Actions, pon tu usuario real:
-  default   = "yedrags04/matomo-custom:latest"
+  default   = "ivysudadera/matomo-custom:latest"
 }

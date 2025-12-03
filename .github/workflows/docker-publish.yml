@@ -22,5 +22,4 @@ jobs:
         with:
           context: ./ejercicio-2
           push: true
-          # Cambia 'tu_usuario' por tu usuario real de Docker Hub
           tags: ivysudadera/matomo-custom:latest

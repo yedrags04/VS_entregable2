@@ -31,11 +31,11 @@ resource "kind_cluster" "default" {
 
       # Persistencia de datos
       extra_mounts {
-        host_path      = "/tmp/data-matomo/db"
+        host_path      = "${path.cwd}/datos_NUEVOS_final/db"
         container_path = "/var/lib/mysql-data"
       }
       extra_mounts {
-        host_path      = "/tmp/data-matomo/html"
+        host_path      = "${path.cwd}/datos_NUEVOS_final/html"
         container_path = "/var/www/html-data"
       }
     }
